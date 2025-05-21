@@ -8,7 +8,7 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-     tailwindcss(),
+    tailwindcss(),
     react(),
     electron({
       main: {
@@ -29,4 +29,17 @@ export default defineConfig({
         : {},
     }),
   ],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
+  server: {
+    watch: {
+      usePolling: false, // Set to true if you're using WSL or Docker
+      interval: 500,      // Increase to debounce frequent edits
+      ignored: ['**/node_modules/**', '**/.git/**'],
+    }
+  },
+
 })
